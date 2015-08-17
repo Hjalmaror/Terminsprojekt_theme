@@ -5,6 +5,21 @@
  * @package Terminsprojekt
  */
 
+    if ( is_page('Startpage') ) {
+?>
+
+<?php 
+    }
+    if ( is_page('Shop') ) {
+?>
+sdssadad
+<?php 
+    }
+    else if( is_page('Checkout')){
+?>
+
+<?php
+    }
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

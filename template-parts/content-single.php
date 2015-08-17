@@ -14,6 +14,10 @@
 		<div class="entry-meta">
 			<?php terminsprojekt_posted_on(); ?>
 		</div><!-- .entry-meta -->
+		<!-- Post image -->
+		<?php if ( has_post_thumbnail() ) : // check if the post has a Post Thumbnail assigned to it. ?> 
+			<?php the_post_thumbnail('full'); ?>
+		<?php endif; ?>
 	</header><!-- .entry-header -->
 
 	<div class="entry-content">
