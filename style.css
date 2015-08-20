@@ -912,19 +912,24 @@ object {
 	height: 100px;
 }
 
-.page_item a{
-	text-decoration: none;
-	padding: 2em 1em;
-	color: #00cc00;
-}
+
 .page_item a:hover{
 	color: #66ff66;
 }
 
 .site-content {
-	width: 90%;
-	margin: 0 auto;
+	width: 100%;
+	
+}
+
+.content-area {
+	width: 80%;
+	margin-right: 9%;
 	background-color: #fff;
 	border: 1px solid #ededed;
+}
+
+.widget-area {
+	width: 10%;
 }
 

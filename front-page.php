@@ -14,9 +14,10 @@ get_header(); ?>
 
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
-			<h1>Starter</h1>
+			<?php if ( has_post_thumbnail() ) { // check if the post has a Post Thumbnail assigned to it.
+	        	the_post_thumbnail();
+	         } ?>
 		</main><!-- #main -->
 	</div><!-- #primary -->
 
-<?php get_sidebar(); ?>
 <?php get_footer(); ?>

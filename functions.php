@@ -107,7 +107,22 @@ function terminsprojekt_widgets_init() {
 	) );
 }
 add_action( 'widgets_init', 'terminsprojekt_widgets_init' );
-
+/**
+ * Register category area.
+ *
+ * @link http://codex.wordpress.org/Function_Reference/register_sidebar
+ */
+if ( function_exists('register_sidebar') ) {
+	register_sidebar(array(
+		'name' => esc_html__( 'Catergory Sidebar', 'terminsprojekt' ),
+		'id' => 'sidebar-2',
+		'description' => 'An area for the category menu',
+		'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+		'after_widget' => '</aside>',
+		'before_title' => '<h1 class="widget-title">>',
+		'after_title' => '</h1>',
+	));
+}
 /**
  * Enqueue scripts and styles.
  */
@@ -118,6 +133,12 @@ function terminsprojekt_scripts() {
 
 	wp_enqueue_script( 'terminsprojekt-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20130115', true );
 
+	wp_enqueue_script( 'terminsprojekt-jquery', get_template_directory_uri() . '/js/jquery-2.1.4.min.js', array(), '20130115', true );
+
+	wp_enqueue_script( 'terminsprojekt-jqueryUI', get_template_directory_uri() . '/js/jquery-ui/jquery-ui.min.js', array(), '20130115', true );
+	
+	wp_enqueue_script( 'terminsprojekt-dragdrop', get_template_directory_uri() . '/js/dragdrop.js', array(), '20130115', true );
+	
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
@@ -227,19 +248,27 @@ function product_price_box() {
 function product_price_box_content( $post ) {
   wp_nonce_field( plugin_basename( __FILE__ ), 'product_price_box_content_nonce' );
   echo '<label for="product_price"></label>';
-  echo '<input type="text" id="product_price" name="product_price" placeholder="enter a price" />';
+  $value = get_post_meta($post->ID, "product_price", true);
+  echo '<input type="text" id="product_price" name="product_price" placeholder="enter a price" value="'.$value.'"/>';
+  echo "$";
 }
 
 // Handeling submitted data
 add_action( 'save_post', 'product_price_box_save' );
 function product_price_box_save( $post_id ) {
 
-	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
-		return;
+	
 
+	// check autosave
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ){ 
+		return $post_id;
+	}
+
+	// verify nonce
 	if ( !wp_verify_nonce( $_POST['product_price_box_content_nonce'], plugin_basename( __FILE__ ) ) )
 		return;
 
+	// check permissions
 	if ( 'page' == $_POST['post_type'] ) {
 		if ( !current_user_can( 'edit_page', $post_id ) )
 			return;
@@ -250,3 +279,42 @@ function product_price_box_save( $post_id ) {
 	$product_price = $_POST['product_price'];
 	update_post_meta( $post_id, 'product_price', $product_price );
 }
+/**
+*	Showcase Custom Post Type
+**/
+function my_custom_post_showcase() {
+	$labels = array(
+		'name'               => _x( 'Showcases', 'post type general name' ),
+		'singular_name'      => _x( 'Showcase', 'post type singular name' ),
+		'add_new'            => _x( 'Add New', 'book' ),
+		'add_new_item'       => __( 'Add New Showcase' ),
+		'edit_item'          => __( 'Edit Showcase' ),
+		'new_item'           => __( 'New Showcase' ),
+		'all_items'          => __( 'All Showcase' ),
+		'view_item'          => __( 'View Showcase' ),
+		'search_items'       => __( 'Search showcases' ),
+		'not_found'          => __( 'No showcase found' ),
+		'not_found_in_trash' => __( 'No showcase found in the Trash' ), 
+		'parent_item_colon'  => '',
+		'menu_name'          => 'Showcases'
+	);
+
+	$args = array(
+		'labels'        => $labels,
+		'description'   => 'Holds our Clothes Showcases data',
+		'public'        => true,
+		'menu_position' => 5,
+		'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments' ),
+		'has_archive'   => true,
+	);
+	register_post_type( 'showcase', $args ); 
+}
+
+add_action( 'init', 'my_custom_post_showcase' );
+/**
+*	Post thumbnail support
+**/
+if ( function_exists( 'add_theme_support' ) ) { 
+    add_theme_support( 'post-thumbnails' );
+}
+
