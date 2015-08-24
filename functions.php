@@ -127,7 +127,8 @@ if ( function_exists('register_sidebar') ) {
  * Enqueue scripts and styles.
  */
 function terminsprojekt_scripts() {
-	wp_enqueue_style( 'terminsprojekt-style', get_stylesheet_uri() );
+	wp_enqueue_style( 'terminsprojekt-style', get_template_directory_uri() . '/css/style.css' );
+	//wp_enqueue_style( 'terminsprojekt-style', get_stylesheet_uri() );
 
 	wp_enqueue_script( 'terminsprojekt-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20120206', true );
 
@@ -209,8 +210,8 @@ add_action( 'init', 'my_custom_post_product' );
 */
 function my_taxonomies_product() {
 	$labels = array(
-		'name'              => _x( 'Product Categories', 'taxonomy general name' ),
-		'singular_name'     => _x( 'Product Category', 'taxonomy singular name' ),
+		'name'              => _x( 'Produkts', 'taxonomy general name' ),
+		'singular_name'     => _x( 'Produkt', 'taxonomy singular name' ),
 		'search_items'      => __( 'Search Product Categories' ),
 		'all_items'         => __( 'All Product Categories' ),
 		'parent_item'       => __( 'Parent Product Category' ),

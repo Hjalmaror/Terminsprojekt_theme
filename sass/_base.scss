@@ -1,11 +1,95 @@
 /*********************************
 ************ HEADER **************
 *********************************/
-
+body{
+	background-color: #f9f9f9;
+}
 .site-header {
-	widows: 100%;
+	width: 100%;
+	height: 100px;
+	background-color: #fff;
+	margin-bottom: 40px;
+	-webkit-box-shadow: 0px 3px 5px 0px rgba(50, 50, 50, 0.1);
+	-moz-box-shadow:    0px 3px 5px 0px rgba(50, 50, 50, 0.1);
+	box-shadow:         0px 3px 5px 0px rgba(50, 50, 50, 0.1);
 
-	.site-navigation {
-		background-color: black;
+	.main-navigation {
+		width: 60%;
+		margin-left: 20%;
+		
+		height: 100px;
+
+		.menu-item {
+			margin-top: 40px;
+			padding: 0 19px;
+
+			a{
+				font-size: 1.2em;
+				//letter-spacing: 1px;
+				text-decoration: none;
+    			text-transform: uppercase;
+    			&:hover {
+					color: #66ff66;
+				}
+			}
+
+			.sub-menu{
+				background-color: white;
+				padding: 25px;
+
+   				li{
+   					margin-top: none;
+					padding: none;
+
+    				a {
+    					font-size: 1em;
+						text-decoration: none;
+		    			text-transform: none;
+		    			
+    				}
+   				}
+			}
+			
+		}
 	}
+}
+
+.site-content{
+	background-color: #fff;
+	width: 90%;
+	margin: 0 auto;
+	border: 1px solid #eeeeee;
+
+	.content-area{
+		width: 90%;
+		margin: 5%;
+	}
+}
+
+
+
+.widget-area {
+	width: 10%;
+}
+
+.product{
+	float: left;
+	padding: 0 20px;
+
+	&:hover {
+		outline: 1px solid #f1f1f1;
+	}
+}
+
+#playarea {
+	width: 200px;
+}
+#mannequin{
+	outline: 1px solid red;
+}
+#type1-1{
+	outline: 1px solid blue;
+}
+#type1-2{
+	outline: 1px solid green;
 }

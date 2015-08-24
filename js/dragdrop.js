@@ -18,8 +18,16 @@ $(document).ready(function() {
       	$( "#type1-1" ).draggable( "option", "disabled", true );
 	    $( "#type1-1" ).position({
 			of: $( "#mannequin" ),
-			my: "center center",
-			at: "center center",
+			my: "center top",
+			at: "center top",
+			collision: "none none" 
+		});
+		$( "#type1-2" ).draggable( "option", "revert", false );
+      	$( "#type1-2" ).draggable( "option", "disabled", true );
+	    $( "#type1-2" ).position({
+			of: $( "#mannequin" ),
+			my: "center bottom",
+			at: "center bottom",
 			collision: "none none" 
 		});
       }
